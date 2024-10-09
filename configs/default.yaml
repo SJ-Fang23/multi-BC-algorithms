@@ -1,0 +1,25 @@
+logdir: ./logs
+seed: 20240418
+deterministic_run: False
+env_name: pusht
+epochs: 1000
+epochs_per_round: 10
+eval_every: 5000
+use_online_eval: True
+max_online_episode_length: 300
+save_every: 3000
+log_every: 5000
+use_dummy_logger: False
+dataset: pushTimgdatasetSingle
+dataset_path: /home/wenchang/baselines-drimer/datasets/pusht/pusht_cchi_v7_replay.zarr
+batch_size: 64
+model: ibc
+
+pusht_config:
+  action_repeat: 1
+
+model_config:
+  CNN_config: {in_channels: 3, blocks: [16, 32, 32], activation_fn: ReLU}
+
+env_config: {image_size: 96}
+optimizer_config: {iters: 3}

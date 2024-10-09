@@ -1,0 +1,74 @@
+logdir: ./logs
+seed: 20240418
+deterministic_run: False
+env_name: pusht
+epochs: 1000
+epochs_per_round: 10
+eval_every: 300
+use_online_eval: True
+max_online_episode_length: 300
+save_every: 3000
+log_every: 5000
+use_dummy_logger: False
+dataset: PushTImageDataset
+dataset_path: /home/wenchang/baselines-drimer/datasets/pusht/pusht_cchi_v7_replay.zarr
+batch_size: 64
+model: ibc_robomimic
+
+
+pusht_config:
+  action_repeat: 1
+
+model_config:
+  use_low_dim_obs: True
+  use_robomimic_encoder: True
+  crop_image: True
+  crop_shape: [76, 76]
+  eval_fixed_crop: True
+
+  shape_meta:
+    action:
+      shape:
+      - 2
+    obs:
+      agent_pos:
+        shape:
+        - 2
+        type: low_dim
+      image:
+        shape:
+        - 3
+        - 96
+        - 96
+        type: rgb
+  n_obs_steps: 2
+  n_action_steps: 4
+  n_predict_steps: 12
+  MLP_config: {hidden_dim: 1024, dropout_prob: 0.1, hidden_depth: 3, activation_fn: ReLU}
+env_config: {image_size: 96}
+env_num: 3
+parallel: True
+use_normalized_image: False
+optimizer_config: {iters: 3}
+
+
+n_predict_steps: 12
+n_obs_steps: 2
+n_action_steps: 4
+n_pred_steps: 12
+image_to_visualize_key: image
+shape_meta:
+    action:
+      shape:
+      - 2
+    obs:
+      agent_pos:
+        shape:
+        - 2
+        type: low_dim
+      image:
+        shape:
+        - 3
+        - 96
+        - 96
+        type: rgb
